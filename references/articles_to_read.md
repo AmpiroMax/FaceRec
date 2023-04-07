@@ -13,3 +13,4 @@ To create a backend structure next solutions were used
 
 - [FastApi](https://fastapi.tiangolo.com/)
 - [Project template](https://github.com/drivendata/cookiecutter-data-science)
+- [Streamlit](https://streamlit.io/)
