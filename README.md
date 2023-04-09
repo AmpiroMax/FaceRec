@@ -1,11 +1,23 @@
-MIPT ML CV HW2
+# MIPT ML CV HW2
+
 ==============================
 
 Face recognition system as a part of ML MIPT homework
 
-Project Organization
+## Getting started
+
+```Bash
+cd FaceRec/
+pip install .
+source ./set_envars.sh
+source ./start_app.sh
+```
+
+## Project Organization
+
 ------------
 
+```Code
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
@@ -48,5 +60,4 @@ Project Organization
     │       └── visualize.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
---------
+```
