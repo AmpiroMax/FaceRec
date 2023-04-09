@@ -1,0 +1,71 @@
+""" Module of image transformations """
+
+from albumentations.pytorch.transforms import ToTensorV2
+import albumentations as albu
+
+IMG_H = 128
+IMG_W = 128
+
+
+def pre_transform() -> albu.BasicTransform:
+    """
+    Creating preporation transformation before augmentation
+    """
+    return albu.Resize(IMG_H, IMG_W, always_apply=True)
+
+
+def augmentation_transforms() -> albu.BaseCompose:
+    """
+    Creating augmenting transformation
+    """
+    result = [
+        albu.GaussNoise(),
+        albu.OneOf(
+            [
+                albu.MotionBlur(blur_limit=3, p=0.7),
+                albu.MedianBlur(blur_limit=3, p=1.0),
+                albu.Blur(blur_limit=3, p=0.7),
+            ],
+            p=0.5
+        ),
+        albu.OneOf(
+            [
+                albu.RandomGamma(gamma_limit=(85, 115), p=0.5),
+                albu.RandomBrightnessContrast(
+                    brightness_limit=0.5,
+                    contrast_limit=0.5,
+                    p=0.5
+                ),
+                albu.CLAHE(clip_limit=2),
+            ],
+            p=0.5
+        ),
+        albu.Rotate(
+            limit=5,
+            crop_border=True
+        ),
+        albu.HorizontalFlip(),
+        albu.RandomResizedCrop(
+            height=IMG_H,
+            width=IMG_W,
+            scale=(0.75, 0.75),
+            always_apply=True
+        )
+    ]
+    return albu.Compose(result)
+
+
+def post_transform() -> albu.BaseCompose:
+    """
+    Creating final transformation with normalization and
+    casting to torch Tensor
+    """
+    return albu.Compose([
+        albu.Normalize(
+            mean=[0.485, 0.456, 0.406],
+            std=[0.229, 0.224, 0.225],
+            max_pixel_value=255.0,
+            always_apply=True
+        ),
+        ToTensorV2()
+    ])
