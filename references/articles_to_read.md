@@ -2,6 +2,7 @@
 
 The proposed solution is based upon next articles
 
+- [Swin Transformer V2](https://arxiv.org/pdf/2111.09883.pdf)
 - [Dual Contrastive Learning for General Face Forgery Detection](https://arxiv.org/pdf/2112.13522v1.pdf)
 - [ArcFace: Additive Angular Margin Loss for DeepFace Recognition](https://arxiv.org/pdf/1801.07698.pdf)
 - [Joint Face Detection and Alignment usingMulti-task Cascaded Convolutional Networks](https://kpzhang93.github.io/MTCNN_face_detection_alignment/paper/spl.pdf)
