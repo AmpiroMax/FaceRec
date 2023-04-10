@@ -14,7 +14,6 @@ def save_model(
     if not os.path.exists(MODELS_PATH + model_name):
         os.makedirs(MODELS_PATH + model_name)
 
-    print(MODELS_PATH + model_name + "/")
     save(
         model,
         MODELS_PATH + model_name + "/" + time

@@ -37,6 +37,7 @@ def augmentation_transforms() -> albu.BaseCompose:
                     p=0.5
                 ),
                 albu.CLAHE(clip_limit=2),
+                albu.ToGray(p=0.5)
             ],
             p=0.5
         ),
@@ -50,6 +51,12 @@ def augmentation_transforms() -> albu.BaseCompose:
             width=IMG_W,
             scale=(0.75, 0.75),
             always_apply=True
+        ),
+        albu.augmentations.dropout.CoarseDropout(
+            max_holes=10,
+            max_height=IMG_H//10,
+            max_width=IMG_W//10,
+            p=0.5
         )
     ]
     return albu.Compose(result)

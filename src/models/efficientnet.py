@@ -6,9 +6,6 @@ from torch import nn
 from torchvision.models import efficientnet_b0
 
 
-MARGIN = 1.0
-
-
 class EfficientNetModel(nn.Module):
     def __init__(
         self,
@@ -21,14 +18,14 @@ class EfficientNetModel(nn.Module):
             nn.Linear(in_features=1280, out_features=embedding_size)
         )
 
-    def set_model_requires_grad(self) -> None:
+    def set_model_head_requires_grad(self) -> None:
         for name, param in self.model.named_parameters():
             if name.split(".")[0] != "classifier":
                 param.requires_grad = False
             else:
                 param.requires_grad = True
 
-    def set_model_to_train(self) -> None:
+    def set_model_to_finetune(self) -> None:
         self.model.eval()
         self.model.classifier.train()
 
